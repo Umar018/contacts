@@ -1,6 +1,4 @@
-const contacts = {
-
-};
+const contacts = {};
 
 function addContacts(name, number) {
   if (contacts[number]) {
@@ -56,9 +54,9 @@ function listContacts() {
 
 function helpContacts() {
   let commands = [
-    { cmd: "add", desc: "Yangi kontakt qo‘shish" },
-    { cmd: "search", desc: "Kontaktni qidirish" },
-    { cmd: "delete", desc: "Kontaktni o‘chirish" },
+    { cmd: "addContacts", desc: "Yangi kontakt qo‘shish" },
+    { cmd: "searchContacts", desc: "Kontaktni qidirish" },
+    { cmd: "deleteContacts", desc: "Kontaktni o‘chirish" },
     { cmd: "list", desc: "Barcha kontaktlarni ko‘rsatish" },
     { cmd: "help", desc: "Mavjud komandalarni ko‘rsatish" },
     { cmd: "exit", desc: "Dasturdan chiqish" },
@@ -71,57 +69,29 @@ function exitContacts() {
   return "Dasturdan chiqish...";
 }
 
-//chatgpt dan test qilish uchun misollar oldim
+while (true) {
+  let choice = prompt(`${helpContacts()}\n\n Servisdan tanlang`)
+    .trim()
+    .toLowerCase();
 
-//TODO addContacts
-console.log(addContacts("Ali", "941234567"));  // ✅ "Kontakt qoshildi"
-console.log(addContacts("Vali", "941234568")); // ✅ "Kontakt qoshildi"
-console.log(addContacts("Ali", "941234567"));  // ❌ "Bu kontakt bor" (Duplicate)
-console.log(addContacts("Botir", "12345"));    // ❌ "raqam 9ta bolishi kerak"
-
-//TODO searchContacts
-console.log(searchContacts("941"));   
-// ✅ ["Ali: 941234567", "Vali: 941234568"]
-
-console.log(searchContacts("567"));   
-// ✅ ["Ali: 941234567"]
-
-console.log(searchContacts("000"));   
-// ❌ "Kontakt yoq"
-
-//TODO deleteContacts
-console.log(deleteContacts("Ali"));   
-// ✅ "kontakt ochib ketdi"
-
-console.log(deleteContacts("941234568")); 
-// ✅ "kontakt ochib ketdi"
-
-console.log(deleteContacts("941234569")); 
-// ❌ "Bunday kontakt yoq"
-
-//TODO listContacts
-console.log(listContacts());  
-// ✅ ["Ali: 941234567", "Vali: 941234568"]
-
-// After deleting all contacts:
-console.log(listContacts());  
-// ❌ "kontakt yoq"
-
-//TODO helpContacts
-console.log(helpContacts());
-/* ✅
-add: Yangi kontakt qo‘shish
-search: Kontaktni qidirish
-delete: Kontaktni o‘chirish
-list: Barcha kontaktlarni ko‘rsatish
-help: Mavjud komandalarni ko‘rsatish
-exit: Dasturdan chiqish
-*/
-
-//TODO exitContacts
-console.log(exitContacts()); 
-// ✅ "Dasturdan chiqish..."
-
-
-
-
+  if (choice === "exit") {
+    console.log(exitContacts());
+    break;
+  } else if (choice === "addcontacts") {
+    let name = prompt("Ism kiriting:");
+    let number = prompt("Raqam kiriting:");
+    console.log(addContacts(name, number));
+  } else if (choice === "searchcontacts") {
+    let query = prompt("Qidirilayotgan raqamni kiriting:");
+    console.log(searchContacts(query));
+  } else if (choice === "deletecontacts") {
+    let input = prompt("Ochirmoqchi bolgan ism yoki raqamni kiriting:");
+    console.log(deleteContacts(input));
+  } else if (choice === "list") {
+    console.log(listContacts());
+  } else if (choice === "help") {
+    console.log(helpContacts());
+  } else {
+    console.log("Notogri buyruq! Qaytadan urinib koring.");
+  }
+}
