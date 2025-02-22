@@ -26,7 +26,7 @@
 // function splitLongWords(text) {
 //     return text.split(' ').map(word => {
 //         if (word.length > 10) {
-//             let mid = Math.floor(word.length / 2);
+//             let mid = Math.floor(word.length / 2 - 1);
 //             if (word.length % 2 === 1) {
 //                 mid += 1;
 //             }
